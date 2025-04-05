@@ -234,6 +234,7 @@ public class LoggingMenu
 
         UserCreated += LogCreate; // Subskrybuj zdarzenie
         UserCreated?.Invoke(client);
+
     }
 
     public static bool notmatches(string password)

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 08:53 PM
+-- Generation Time: Apr 05, 2025 at 11:19 PM
 -- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Wersja PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,6 +26,18 @@ USE `pizzeria`;
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `admini`
+--
+
+CREATE TABLE `admini` (
+  `ID` int(11) NOT NULL,
+  `Nazwa` varchar(30) NOT NULL,
+  `Haslo` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `klienci`
 --
 
@@ -35,6 +47,15 @@ CREATE TABLE `klienci` (
   `Haslo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `klienci`
+--
+
+INSERT INTO `klienci` (`ID`, `Nazwa`, `Haslo`) VALUES
+(1, 'Jonatan', 'Chludowo123$'),
+(2, 'Gordon', 'picC0lo#'),
+(3, 'Jimbo', 'Koch@mCiuchc1e');
+
 -- --------------------------------------------------------
 
 --
@@ -43,10 +64,17 @@ CREATE TABLE `klienci` (
 
 CREATE TABLE `pracownicy` (
   `ID` int(11) NOT NULL,
-  `Nazwa` int(11) NOT NULL,
-  `Haslo` int(11) NOT NULL,
-  `CzyAdmin` tinyint(1) NOT NULL
+  `Nazwa` varchar(30) NOT NULL,
+  `Haslo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pracownicy`
+--
+
+INSERT INTO `pracownicy` (`ID`, `Nazwa`, `Haslo`) VALUES
+(2, 'SosMaster', 'koch@mPieski123'),
+(3, 'CiastoMaster', 'Placek!90');
 
 -- --------------------------------------------------------
 
@@ -65,6 +93,12 @@ CREATE TABLE `zamowienia` (
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `admini`
+--
+ALTER TABLE `admini`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indeksy dla tabeli `klienci`
@@ -89,16 +123,22 @@ ALTER TABLE `zamowienia`
 --
 
 --
+-- AUTO_INCREMENT for table `admini`
+--
+ALTER TABLE `admini`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `zamowienia`
