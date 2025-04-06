@@ -1,33 +1,245 @@
 ﻿using System;
-public enum size
+namespace Pizzeria.pizza
 {
-    Small,
-    Medium,
-    Large,
-    ExtraLarge
-}
-public enum extras
-{
-	salami,
-	chicken,
-	ham,
-	onions,
-	pinaple,
-	mushroom
+    public enum size
+    {
+        Small,
+        Medium,
+        Large,
+        ExtraLarge
+    }
+    public enum toppings
+    {
+        salami,
+        chicken,
+        ham,
+        pepperoni,
+        onions,
+        pinaple,
+        mushroom,
+        olives,
+        oregano
+    }
+    public abstract class Pizza
+    {
 
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public bool Cheese { get; set; }
+        public bool TomatoSauce { get; set; }
+        public List<toppings> Toppings { get; set; }
+        public decimal Price { get; set; }
 
-}
-public class Pizza
-{
-	
-	public string Name {  get; set; }
-	public size Size { get; set; }
-	public bool Cheese = true;
-    public bool TomatoSauce = true;
-    public List<extras> Extras { get; set; }
+        public Pizza(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null)
+        {
+            this.Size = Size;
+            this.Cheese = Cheese;
+            this.TomatoSauce = TomatoSauce;
+            this.Toppings = Toppings;
+        }
+    }
+    public sealed class Margherita : Pizza
+    {
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public Margherita(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
+        {
+            Name = "Margharita";
+        }
+        public bool Cheese { get; set; }
+        public bool TomatoSauce { get; set; }
+        public decimal Price
+        {
+            get { return Price; }
+            set
+            {
+                switch (Size)
+                {
+                    case size.Small:
+                        Price = 20.0M;
+                        break;
+                    case size.Medium:
+                        Price = 25.0M;
+                        break;
+                    case size.Large:
+                        Price = 35.0M;
+                        break;
+                    case size.ExtraLarge:
+                        Price = 40.0M;
+                        break;
+                }
+            }
+        }
+    }
 
+    public sealed class Pepperoni : Pizza
+    {
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public Pepperoni(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
+        {
+            Name = "Pepperoni";
+        }
+        public bool Cheese { get; set; } = true;
+        public bool TomatoSauce { get; set; } = true;
+        public List<toppings> Toppings
+        {
+            get { return Toppings; }
+            set
+            {
+                Toppings.Add(toppings.pepperoni);
+            }
+        }
+        public decimal Price
+        {
+            get { return Price; }
+            set
+            {
+                switch (Size)
+                {
+                    case size.Small:
+                        Price = 22.5M;
+                        break;
+                    case size.Medium:
+                        Price = 27.5M;
+                        break;
+                    case size.Large:
+                        Price = 37.5M;
+                        break;
+                    case size.ExtraLarge:
+                        Price = 42.5M;
+                        break;
+                }
+            }
+        }
+    }
 
-	public Pizza()
-	{
-	}
+    public sealed class Hawaiian : Pizza
+    {
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public Hawaiian(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
+        {
+            Name = "Hawaiian";
+        }
+        public bool Cheese { get; set; } = true;
+        public bool TomatoSauce { get; set; } = true;
+        public List<toppings> Toppings
+        {
+            get { return Toppings; }
+            set
+            {
+                Toppings.Add(toppings.ham);
+                Toppings.Add(toppings.pinaple);
+            }
+        }
+        public decimal Price
+        {
+            get { return Price; }
+            set
+            {
+                switch (Size)
+                {
+                    case size.Small:
+                        Price = 24.5M;
+                        break;
+                    case size.Medium:
+                        Price = 29.5M;
+                        break;
+                    case size.Large:
+                        Price = 39.5M;
+                        break;
+                    case size.ExtraLarge:
+                        Price = 44.5M;
+                        break;
+                }
+            }
+        }
+    }
+    public sealed class Capricciosa : Pizza
+    {
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public Capricciosa(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
+        {
+            Name = "Capricciosa";
+        }
+        public bool Cheese { get; set; } = true;
+        public bool TomatoSauce { get; set; } = true;
+        public List<toppings> Toppings
+        {
+            get { return Toppings; }
+            set
+            {
+                Toppings.Add(toppings.ham);
+                Toppings.Add(toppings.mushroom);
+                Toppings.Add(toppings.olives);
+            }
+        }
+        public decimal Price
+        {
+            get { return Price; }
+            set
+            {
+                switch (Size)
+                {
+                    case size.Small:
+                        Price = 25M;
+                        break;
+                    case size.Medium:
+                        Price = 30M;
+                        break;
+                    case size.Large:
+                        Price = 40M;
+                        break;
+                    case size.ExtraLarge:
+                        Price = 45M;
+                        break;
+                }
+            }
+        }
+    }
+    public sealed class JohnnysSpecial : Pizza
+    {
+        public string Name { get; set; }
+        public size Size { get; set; }
+        public JohnnysSpecial(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
+        {
+            Name = "JohnnysSpecial";
+        }
+        public bool Cheese { get; set; } = true;
+        public bool TomatoSauce { get; set; } = true;
+        public List<toppings> Toppings
+        {
+            get { return Toppings; }
+            set
+            {
+                Toppings.Add(toppings.chicken);
+                Toppings.Add(toppings.ham);
+                Toppings.Add(toppings.salami);
+            }
+        }
+        public decimal Price
+        {
+            get { return Price; }
+            set
+            {
+                switch (Size)
+                {
+                    case size.Small:
+                        Price = 25M;
+                        break;
+                    case size.Medium:
+                        Price = 30M;
+                        break;
+                    case size.Large:
+                        Price = 40M;
+                        break;
+                    case size.ExtraLarge:
+                        Price = 45M;
+                        break;
+                }
+            }
+        }
+    }
 }
