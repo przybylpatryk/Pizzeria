@@ -37,7 +37,7 @@ public class LoggingMenu
             choice = Console.ReadLine();
         }
 
-        //zwykły switch case
+        //sprawdzanie przypadków
         switch (choice)
         {
             case "1":
