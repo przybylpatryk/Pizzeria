@@ -23,30 +23,5 @@ namespace Pizzeria.rbac
                     return false;
             }
         }
-
-        public bool HasPerms(User user, string resource)
-        {
-            switch (resource)
-            {
-                case "CreateOrder":
-                    return user.UserRole == User.Role.Client;
-                case "AddReview":
-                    return user.UserRole == User.Role.Client;
-                case "TakeOrder":
-                    return user.UserRole == User.Role.Worker;
-                case "MakePizza":
-                    return user.UserRole == User.Role.Worker;
-                case "ManageOrders":
-                    return user.UserRole == User.Role.Admin;
-                case "ManageUsers":
-                    return user.UserRole == User.Role.Admin;
-                case "AddPizza":
-                    return user.UserRole == User.Role.Admin;
-                case "DeletePizza":
-                    return user.UserRole == User.Role.Admin;
-                default:
-                    return false;
-            }
-        }
     }
 }

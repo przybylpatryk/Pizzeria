@@ -11,20 +11,6 @@ namespace Pizzeria.users
             Admin,
         }
 
-        public enum Permission
-        {
-            CreateOrder,
-            AddReview,
-
-            TakeOrder,
-            MakePizza,
-
-            ManageOrders,
-            ManageUsers,
-            AddPizza,
-            DeletePizza
-        }
-
         public string Username { get; set; }
         public string Password { get; set; }
         public Role UserRole { get; set; }

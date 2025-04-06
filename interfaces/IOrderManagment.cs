@@ -4,7 +4,7 @@ namespace Pizzeria.interfaces
 {
     public interface IOrderManagment
     {
-        public void OrderPreview();
+        //public void OrderPreview();
 
 
     }

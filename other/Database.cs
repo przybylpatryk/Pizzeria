@@ -92,11 +92,32 @@ namespace Pizzeria.database
         //    List<Order> orders = new List<Order>();
         //    while (row.Read())
         //    {
-        //        Order order = new Order(row["ID"].ToString(), row["RodzajPizzy"].ToString(), row["ID_pracownika"].ToString(), row["ID_klienta"].ToString(), row["Data_zamowienia"].ToString());
+        //        Order order = new Order(row["ID"].ToString(), row["Rodzaj_pizzy"].ToString(), row["ID_pracownika"].ToString(), row["ID_klienta"].ToString(), row["Data_zamowienia"].ToString());
         //        orders.Add(order);
         //    }
         //    row.Close();
         //    return orders;
         //}
+
+        public void AddReview(string review, string clientUsername)
+        {
+            string query = $"INSERT INTO opinie (ID, Nazwa_klienta, opinia) VALUES (ID, '{clientUsername}', '{review}')";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
+
+        public void HireWorker(string name, string password)
+        {
+            string query = $"INSERT INTO pracownicy (ID, Nazwa, Haslo) VALUES (NULL, '{name}', '{password}')";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
+
+        public void FireWorker(string name, string password)
+        {
+            string query = $"DELETE FROM pracownicy WHERE Nazwa='{name}' AND Haslo = '{password}';)";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
     }
 }

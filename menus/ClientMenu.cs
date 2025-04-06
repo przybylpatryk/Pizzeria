@@ -15,7 +15,7 @@ namespace Pizzeria.menus
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
             Console.WriteLine("1. Zamówienie pizzy");
-            Console.WriteLine("2. ");
+            Console.WriteLine("2. Dodaj recenzje");
             Console.WriteLine("3. Wyjdź");
             Console.WriteLine();
             Console.Write("Twój wybór: ");
@@ -34,7 +34,7 @@ namespace Pizzeria.menus
                     client.CreateOrder();
                     break;
                 case "2":
-                    //
+                    client.AddReview();
                     break;
                 case "3":
                     Console.WriteLine("Wychodzenie z programu...");
