@@ -24,7 +24,7 @@ public class LoggingMenu
         Console.WriteLine("1. Bywalec? Zaloguj się");
         Console.WriteLine("2. Nowy klient? Zarejestruj się");
         Console.WriteLine("3. Pracujesz tu? Zaloguj się i pracuj");
-        Console.WriteLine("4. Admin? Prosze tędy");
+        Console.WriteLine("4. Admin? Proszę tędy");
         Console.WriteLine("5. Wyjdź");
         Console.WriteLine();
         Console.Write("Twój wybór: ");

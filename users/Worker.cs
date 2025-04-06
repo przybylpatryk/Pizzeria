@@ -13,5 +13,14 @@ namespace Pizzeria.users
         {
             workerMenu = new WorkerMenu();
         }
+
+        public void OrderPreview()
+        {
+
+            Console.WriteLine($"Zamówienie nr {0}");
+            Console.WriteLine($"Pizza: {0}");
+            Console.WriteLine($"Data zamówienia: {0}");
+            
+        }
     }
 }
