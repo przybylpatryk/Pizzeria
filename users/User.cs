@@ -9,7 +9,6 @@ namespace Pizzeria.users
             Client,
             Worker,
             Admin,
-            Test
         }
 
         public enum Permission

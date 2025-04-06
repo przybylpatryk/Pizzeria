@@ -31,7 +31,7 @@ namespace Pizzeria.menus
             switch (choice)
             {
                 case "1":
-                    //Zamowienie();
+                    client.CreateOrder();
                     break;
                 case "2":
                     //

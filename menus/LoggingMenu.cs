@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Pizzeria.users;
 using Pizzeria.database;
+using Pizzeria.rbac;
 namespace Pizzeria.menus;
 
 public class LoggingMenu
@@ -9,10 +10,13 @@ public class LoggingMenu
     public event Action<User> UserCreated;
 
     public Database DB { get; set; }
+    public RBAC Rbac { get; set; }
+
     public LoggingMenu()
     {
         //tworzenie bazy danych
         DB = new Database();
+        Rbac = new RBAC();
     }
     public void Menu()
     {
@@ -99,7 +103,16 @@ public class LoggingMenu
             Console.WriteLine("Zalogowano pomyślnie!");
             Thread.Sleep(1500);
             Client client = new Client(username, password);
-            client.clientMenu.Menu(client);
+            if (Rbac.CanAccess(client, "ClientPanel"))
+            {
+                client.clientMenu.Menu(client);
+            }
+            else
+            {
+                Console.WriteLine("Brak dostępu!");
+                Thread.Sleep(1500);
+                Menu();
+            }
         }
         else
         {
@@ -144,7 +157,16 @@ public class LoggingMenu
             Console.WriteLine("Zalogowano pomyślnie!");
             Thread.Sleep(1500);
             Worker worker = new Worker(username, password);
-            worker.workerMenu.Menu(worker);
+            if (Rbac.CanAccess(worker, "WorkerPanel"))
+            {
+                worker.workerMenu.Menu(worker);
+            }
+            else
+            {
+                Console.WriteLine("Brak dostępu!");
+                Thread.Sleep(1500);
+                Menu();
+            }
         }
         else
         {
@@ -189,7 +211,16 @@ public class LoggingMenu
             Console.WriteLine("Zalogowano pomyślnie!");
             Thread.Sleep(1500);
             Admin admin = new Admin(username, password);
-            admin.adminMenu.Menu(admin);
+            if (Rbac.CanAccess(admin, "AdminPanel"))
+            {
+                admin.adminMenu.Menu(admin);
+            }
+            else
+            {
+                Console.WriteLine("Brak dostępu!");
+                Thread.Sleep(1500);
+                Menu();
+            }
         }
         else
         {

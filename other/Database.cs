@@ -1,6 +1,7 @@
 ﻿using System;
 using MySqlConnector;
 using Pizzeria.users;
+
 namespace Pizzeria.database
 {
     public class Database
@@ -82,5 +83,20 @@ namespace Pizzeria.database
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }
+
+        //public List<Order> GetOrderPreview(int ID)
+        //{
+        //    string query = $"SELECT ID, RodzajPizzy, Data_zamowienia FROM zamowienia WHERE ID = {ID}";
+        //    MySqlCommand result = new MySqlCommand(query, Conn);
+        //    MySqlDataReader row = result.ExecuteReader();
+        //    List<Order> orders = new List<Order>();
+        //    while (row.Read())
+        //    {
+        //        Order order = new Order(row["ID"].ToString(), row["RodzajPizzy"].ToString(), row["ID_pracownika"].ToString(), row["ID_klienta"].ToString(), row["Data_zamowienia"].ToString());
+        //        orders.Add(order);
+        //    }
+        //    row.Close();
+        //    return orders;
+        //}
     }
 }
