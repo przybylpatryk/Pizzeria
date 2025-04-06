@@ -13,5 +13,15 @@ namespace Pizzeria.users
         {
             clientMenu = new ClientMenu();
         }
-	}
+
+		public void CreateOrder()
+		{
+
+		}
+
+		public void AddReview()
+		{
+
+		}
+    }
 }
