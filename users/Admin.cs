@@ -24,6 +24,8 @@ namespace Pizzeria.users
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine("      Prosimy o zarejestrowanie nowego pracownika      ");
             Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Wpisz 'esc' by anulować         ");
+            Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
             Console.Write("Podaj nazwe nowego pracownika: ");
 
@@ -31,6 +33,13 @@ namespace Pizzeria.users
             string? username = Console.ReadLine();
             while (string.IsNullOrEmpty(username) || isnotfree(username))
             {
+                if (username.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano dodawanie pracownika!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
                 Console.Write("Pusto, lub ta nazwa jest już zajęta, spróbuj ponownie: ");
                 username = Console.ReadLine();
             }
@@ -40,6 +49,13 @@ namespace Pizzeria.users
             string? password = Console.ReadLine();
             while (string.IsNullOrEmpty(password) || notmatches(password))
             {
+                if (password.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano dodawanie pracownika!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
                 Console.Write("Pusto, lub za słabe hasło, spróbuj ponownie: ");
                 password = Console.ReadLine();
             }
@@ -56,6 +72,8 @@ namespace Pizzeria.users
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine("         Prosimy o usunięcie pracownika       ");
             Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Wpisz 'esc' by anulować         ");
+            Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
             Console.Write("Podaj pracownika do zwolnienia: ");
 
@@ -63,6 +81,13 @@ namespace Pizzeria.users
             string? username = Console.ReadLine();
             while (string.IsNullOrEmpty(username) || isusername(username))
             {
+                if (username.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano usuwanie pracownika!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
                 Console.Write("Pusto, lub nie ma takiego użytkownika: ");
                 username = Console.ReadLine();
             }
@@ -72,6 +97,13 @@ namespace Pizzeria.users
             string? password = Console.ReadLine();
             while (string.IsNullOrEmpty(password) || ispassword(username, password))
             {
+                if (password.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano usuwanie pracownika!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
                 Console.Write("Pusto, lub użytkownik nie ma takiego hasła: ");
                 password = Console.ReadLine();
             }

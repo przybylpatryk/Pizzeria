@@ -115,7 +115,7 @@ namespace Pizzeria.database
 
         public void FireWorker(string name, string password)
         {
-            string query = $"DELETE FROM pracownicy WHERE Nazwa='{name}' AND Haslo = '{password}';)";
+            string query = $"DELETE FROM pracownicy WHERE Nazwa='{name}' AND Haslo = '{password}';";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }
