@@ -7,7 +7,9 @@ namespace Pizzeria.menus;
 
 public class LoggingMenu
 {
-    public event Action<User> UserCreated;
+    public delegate void UserEventHandler(User user);
+    public event UserEventHandler? UserCreated;
+    public event UserEventHandler? UserLoggedIn;
 
     public Database DB { get; set; }
     public RBAC Rbac { get; set; }
@@ -101,6 +103,8 @@ public class LoggingMenu
         if (clients.Any(c => c.Username == username && c.Password == password))
         {
             Console.WriteLine("Zalogowano pomyślnie!");
+            UserLoggedIn += LogIn;
+            UserLoggedIn?.Invoke(new Client(username, password));
             Thread.Sleep(1500);
             Client client = new Client(username, password);
             if (Rbac.CanAccess(client, "ClientPanel"))
@@ -155,6 +159,8 @@ public class LoggingMenu
         if (workers.Any(w => w.Username == username && w.Password == password))
         {
             Console.WriteLine("Zalogowano pomyślnie!");
+            UserLoggedIn += LogIn;
+            UserLoggedIn?.Invoke(new Worker(username, password));
             Thread.Sleep(1500);
             Worker worker = new Worker(username, password);
             if (Rbac.CanAccess(worker, "WorkerPanel"))
@@ -209,6 +215,8 @@ public class LoggingMenu
         if (admins.Any(a => a.Username == username && a.Password == password))
         {
             Console.WriteLine("Zalogowano pomyślnie!");
+            UserLoggedIn += LogIn;
+            UserLoggedIn?.Invoke(new Admin(username, password));
             Thread.Sleep(1500);
             Admin admin = new Admin(username, password);
             if (Rbac.CanAccess(admin, "AdminPanel"))
@@ -302,6 +310,13 @@ public class LoggingMenu
     {
         string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
         string logMessage = $"{DateTime.Now}: Nowy użytkownik z nazwą {user.Username} został stworzony z rolą: {user.UserRole}";
+        File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+    }
+
+    public static void LogIn(User user)
+    {
+        string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+        string logMessage = $"{DateTime.Now}: Użytkownik z nazwą {user.Username} zalogował się z rolą: {user.UserRole}";
         File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
     }
 }
