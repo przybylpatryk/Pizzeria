@@ -12,6 +12,7 @@ namespace Pizzeria.order
         public Worker AssignedWorker {  get; set; }
         public Client AssignedClient { get; set; }
         private DateTime date;
+        public static List<Order> ActiveUntakenOrders = new List<Order>();
 
         public DateTime DateOfOrder
         {

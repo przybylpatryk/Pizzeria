@@ -79,17 +79,11 @@ namespace Pizzeria.pizza
         public Pepperoni(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Name = "Pepperoni";
+            Toppings.Add(toppings.pepperoni);
         }
         public bool Cheese { get; set; } = true;
         public bool TomatoSauce { get; set; } = true;
-        public List<toppings> Toppings
-        {
-            get { return Toppings; }
-            set
-            {
-                Toppings.Add(toppings.pepperoni);
-            }
-        }
+        public List<toppings> Toppings{ get; set; }
         public decimal Price
         {
             get { return Price; }
@@ -120,19 +114,13 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public Hawaiian(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
-            Name = "Hawaiian";
+            Name = "Hawajska";
+            Toppings.Add(toppings.ham);
+            Toppings.Add(toppings.pinaple);
         }
         public bool Cheese { get; set; } = true;
         public bool TomatoSauce { get; set; } = true;
-        public List<toppings> Toppings
-        {
-            get { return Toppings; }
-            set
-            {
-                Toppings.Add(toppings.ham);
-                Toppings.Add(toppings.pinaple);
-            }
-        }
+        public List<toppings> Toppings { get; set; }
         public decimal Price
         {
             get { return Price; }
@@ -163,19 +151,13 @@ namespace Pizzeria.pizza
         public Capricciosa(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Name = "Capricciosa";
+            Toppings.Add(toppings.ham);
+            Toppings.Add(toppings.mushroom);
+            Toppings.Add(toppings.olives);
         }
         public bool Cheese { get; set; } = true;
         public bool TomatoSauce { get; set; } = true;
-        public List<toppings> Toppings
-        {
-            get { return Toppings; }
-            set
-            {
-                Toppings.Add(toppings.ham);
-                Toppings.Add(toppings.mushroom);
-                Toppings.Add(toppings.olives);
-            }
-        }
+        public List<toppings> Toppings { get; set; }
         public decimal Price
         {
             get { return Price; }
@@ -206,19 +188,13 @@ namespace Pizzeria.pizza
         public JohnnysSpecial(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Name = "JohnnysSpecial";
+            Toppings.Add(toppings.chicken);
+            Toppings.Add(toppings.ham);
+            Toppings.Add(toppings.salami);
         }
         public bool Cheese { get; set; } = true;
         public bool TomatoSauce { get; set; } = true;
-        public List<toppings> Toppings
-        {
-            get { return Toppings; }
-            set
-            {
-                Toppings.Add(toppings.chicken);
-                Toppings.Add(toppings.ham);
-                Toppings.Add(toppings.salami);
-            }
-        }
+        public List<toppings> Toppings { get; set; }
         public decimal Price
         {
             get { return Price; }

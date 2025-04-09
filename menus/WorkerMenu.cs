@@ -1,6 +1,7 @@
 ﻿using System;
 using Pizzeria.users;
 
+
 namespace Pizzeria.menus
 {
     public class WorkerMenu
@@ -30,13 +31,13 @@ namespace Pizzeria.menus
             switch (choice)
             {
                 case "1":
-                    //TakeOrder();
+                    worker.TakeOrder();
                     break;
                 case "2":
-                    //MakePizza();
+                    worker.MakePizza();
                     break;
                 case "3":
-                    //OrderPreview();
+                    worker.OrderPreview();
                     break;
                 case "4":
                     Console.WriteLine("Wychodzenie z programu...");
