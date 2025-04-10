@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2025 at 11:19 PM
+-- Generation Time: Apr 10, 2025 at 08:07 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.0.30
 
@@ -35,6 +35,13 @@ CREATE TABLE `admini` (
   `Haslo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admini`
+--
+
+INSERT INTO `admini` (`ID`, `Nazwa`, `Haslo`) VALUES
+(1, 'Jacob', '!Ubis0ft');
+
 -- --------------------------------------------------------
 
 --
@@ -59,22 +66,42 @@ INSERT INTO `klienci` (`ID`, `Nazwa`, `Haslo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `opinie`
+--
+
+CREATE TABLE `opinie` (
+  `ID` int(11) NOT NULL,
+  `Nazwa_klienta` varchar(30) NOT NULL,
+  `opinia` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `opinie`
+--
+
+INSERT INTO `opinie` (`ID`, `Nazwa_klienta`, `opinia`) VALUES
+(1, 'Gordon', 'lepsze niż piccolo bez kappy');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `pracownicy`
 --
 
 CREATE TABLE `pracownicy` (
   `ID` int(11) NOT NULL,
   `Nazwa` varchar(30) NOT NULL,
-  `Haslo` varchar(30) NOT NULL
+  `Haslo` varchar(30) NOT NULL,
+  `Placa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pracownicy`
 --
 
-INSERT INTO `pracownicy` (`ID`, `Nazwa`, `Haslo`) VALUES
-(2, 'SosMaster', 'koch@mPieski123'),
-(3, 'CiastoMaster', 'Placek!90');
+INSERT INTO `pracownicy` (`ID`, `Nazwa`, `Haslo`, `Placa`) VALUES
+(3, 'CiastoMaster', 'Placek!90', 5000),
+(4, 'GruszkaMaster', 'Sk1b1d!', 6300);
 
 -- --------------------------------------------------------
 
@@ -84,11 +111,18 @@ INSERT INTO `pracownicy` (`ID`, `Nazwa`, `Haslo`) VALUES
 
 CREATE TABLE `zamowienia` (
   `ID` int(11) NOT NULL,
-  `RodzajPizzy` varchar(30) NOT NULL,
-  `ID_pracownika` int(11) NOT NULL,
-  `ID_klienta` int(11) NOT NULL,
+  `Rodzaj_pizzy` varchar(30) NOT NULL,
+  `Nazwa_pracownika` varchar(30) NOT NULL,
+  `Nazwa_klienta` varchar(30) NOT NULL,
   `Data_zamowienia` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `zamowienia`
+--
+
+INSERT INTO `zamowienia` (`ID`, `Rodzaj_pizzy`, `Nazwa_pracownika`, `Nazwa_klienta`, `Data_zamowienia`) VALUES
+(1, 'Salami', '1', '1', '2025-04-06');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -104,6 +138,12 @@ ALTER TABLE `admini`
 -- Indeksy dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indeksy dla tabeli `opinie`
+--
+ALTER TABLE `opinie`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -126,7 +166,7 @@ ALTER TABLE `zamowienia`
 -- AUTO_INCREMENT for table `admini`
 --
 ALTER TABLE `admini`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `klienci`
@@ -135,16 +175,22 @@ ALTER TABLE `klienci`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `opinie`
+--
+ALTER TABLE `opinie`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,6 +1,18 @@
 ﻿using System;
 using MySqlConnector;
 using Pizzeria.users;
+using System.Collections.Generic;
+using System.Threading;
+using Pizzeria.order;
+using Pizzeria.pizza;
+using Pizzeria.interfaces;
+using System.IO;
+using Pizzeria.menus;
+using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace Pizzeria.database
 {
@@ -116,6 +128,32 @@ namespace Pizzeria.database
         public void FireWorker(string name, string password)
         {
             string query = $"DELETE FROM pracownicy WHERE Nazwa='{name}' AND Haslo = '{password}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
+
+        //public List<Order> GetOrder()
+        //{
+        //    string query = $"SELECT * FROM zamowienia";
+        //    MySqlCommand result = new MySqlCommand(query, Conn);
+        //    MySqlDataReader row = result.ExecuteReader();
+        //    while (row.Read())
+        //    {
+        //        Console.WriteLine($"ID: {row["ID"]}, Rodzaj pizzy: {row["Rodzaj_pizzy"]}, Data zamówienia: {row["Data_zamowienia"]}");
+        //    }
+        //    row.Close();
+        //}
+
+        //public void AddOrder(Pizza pizza, Client client, DateTime date)
+        //{
+        //    string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.Name}', '{client.Username}', '{date}')";
+        //    MySqlCommand result = new MySqlCommand(query, Conn);
+        //    result.ExecuteNonQuery();
+        //}
+
+        public void IncreaseSalary(string name, string password, int salary)
+        {
+            string query = $"UPDATE pracownicy SET Placa = Placa + {salary} WHERE Nazwa='{name}' AND Haslo = '{password}';";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }

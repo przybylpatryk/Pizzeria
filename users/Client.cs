@@ -124,11 +124,12 @@ namespace Pizzeria.users
             }
             ActiveOrder = new Order(pizza, this, date);
             Order.ActiveUntakenOrders.Add(ActiveOrder);
+            //DB.AddOrder(pizza, this, date);
         }
 
-		public void AddReview()
-		{
-			Console.Clear();
+        public void AddReview()
+        {
+            Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine("         Dodaj recenzję!      ");
             Console.WriteLine("///////////////////////////////////////////");
@@ -138,14 +139,18 @@ namespace Pizzeria.users
             Console.Write("Napisz swoją recenzje: ");
 
             string? opinion = Console.ReadLine();
-            while (string.IsNullOrEmpty(opinion))
+            while (true)
             {
-                if (opinion.ToLower() == "esc")
+                if (!string.IsNullOrEmpty(opinion) && opinion.ToLower() == "esc")
                 {
                     Console.WriteLine("Anulowano dodawanie recenzji!");
                     Thread.Sleep(1500);
                     clientMenu.Menu(this);
                     return;
+                }
+                else if (!string.IsNullOrEmpty(opinion))
+                {
+                    break;
                 }
                 Console.Write("Pusto!, spróbuj ponownie: ");
                 opinion = Console.ReadLine();
