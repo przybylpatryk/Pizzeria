@@ -61,7 +61,7 @@ namespace Pizzeria.users
             }
             Console.WriteLine("Podaj rozmiar pizzy (Mała, Średnia, Duża, Bardzo Duża)");
             string? sizeInput = Console.ReadLine().ToLower();
-            while (string.IsNullOrEmpty(sizeInput) || sizeInput != "mała" || sizeInput != "średnia" || sizeInput != "duża" || sizeInput != "bardzo duża")
+            while (string.IsNullOrEmpty(sizeInput) || (sizeInput != "mała" && sizeInput != "średnia" && sizeInput != "duża" && sizeInput != "bardzo duża")) 
             {
                 Console.Write("Niepoprawny rozmiar pizzy, spróbuj ponownie (Mała, Średnia, Duża, Bardzo Duża): ");
                 sizeInput = Console.ReadLine().ToLower();
