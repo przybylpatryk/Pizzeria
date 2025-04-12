@@ -19,11 +19,10 @@ namespace Pizzeria.order
             get { return date.Date; }
             set { date = value.Date; }
         }
-        public Order(Pizza Pizza, Client AssignedClient, DateTime DateOfOrder)
+        public Order(Pizza Pizza, Client AssignedClient)
         {
             this.Pizza = Pizza;
             this.AssignedClient = AssignedClient;
-            this.DateOfOrder = DateOfOrder;
         }
     }
 }

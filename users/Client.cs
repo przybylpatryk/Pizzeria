@@ -92,16 +92,6 @@ namespace Pizzeria.users
                 CreateOrder();
             }
 
-
-            Console.WriteLine("Podaj datę zamówienia (format: RRRR-MM-DD):");
-            string? dateInput = Console.ReadLine();
-            DateTime date;
-            while (!DateTime.TryParse(dateInput, out date) || date.Date < DateTime.Now.Date)
-            {
-                Console.Write("Niepoprawny format daty, spróbuj ponownie (format: RRRR-MM-DD): ");
-                dateInput = Console.ReadLine();
-            }
-
             Pizza pizza = null;
             switch (choice)
             {
@@ -122,9 +112,12 @@ namespace Pizzeria.users
                     break;
                 
             }
-            ActiveOrder = new Order(pizza, this, date);
+
+            ActiveOrder = new Order(pizza, this);
             Order.ActiveUntakenOrders.Add(ActiveOrder);
-            //DB.AddOrder(pizza, this, date);
+            Console.WriteLine($"Zamówienie zostało dodane! {pizza.GetType().Name} w rozmiarze {size}");
+            this.clientMenu.Menu(this);
+            DB.AddOrder(pizza, this);
         }
 
         public void AddReview()

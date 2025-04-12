@@ -34,6 +34,8 @@ namespace Pizzeria.database
             catch (Exception ex)
             {
                 Console.WriteLine($"Błąd połączenia z bazą: {ex.Message}");
+                Thread.Sleep(1500);
+                System.Environment.Exit(0);
             }
         }
 
@@ -144,12 +146,12 @@ namespace Pizzeria.database
         //    row.Close();
         //}
 
-        //public void AddOrder(Pizza pizza, Client client, DateTime date)
-        //{
-        //    string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.Name}', '{client.Username}', '{date}')";
-        //    MySqlCommand result = new MySqlCommand(query, Conn);
-        //    result.ExecuteNonQuery();
-        //}
+        public void AddOrder(Pizza pizza, Client client)
+        {
+            string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.Name}', '{client.Username}', NOW())";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
 
         public void IncreaseSalary(string name, string password, int salary)
         {
