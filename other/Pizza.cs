@@ -32,6 +32,7 @@ namespace Pizzeria.pizza
 
         public Pizza(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null)
         {
+            Toppings = new List<toppings>();
             this.Size = Size;
             this.Cheese = Cheese;
             this.TomatoSauce = TomatoSauce;
@@ -44,6 +45,7 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public Margherita(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
+            Toppings = new List<toppings>();
             Name = "Margharita";
         }
         public bool Cheese { get; set; }
@@ -78,6 +80,7 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public Pepperoni(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
+            Toppings = new List<toppings>();
             Name = "Pepperoni";
             Toppings.Add(toppings.pepperoni);
         }
@@ -114,6 +117,7 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public Hawaiian(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
+            Toppings = new List<toppings>();
             Name = "Hawajska";
             Toppings.Add(toppings.ham);
             Toppings.Add(toppings.pinaple);
@@ -150,6 +154,7 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public Capricciosa(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
+            Toppings = new List<toppings>();
             Name = "Capricciosa";
             Toppings.Add(toppings.ham);
             Toppings.Add(toppings.mushroom);
@@ -187,6 +192,7 @@ namespace Pizzeria.pizza
         public size Size { get; set; }
         public JohnnysSpecial(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
+            Toppings = new List<toppings>();
             Name = "JohnnysSpecial";
             Toppings.Add(toppings.chicken);
             Toppings.Add(toppings.ham);

@@ -14,8 +14,8 @@ namespace Pizzeria.menus
             Console.WriteLine("         Witamy w pizzerii!      ");
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
-            Console.WriteLine("1. Zamówienie pizzy");
-            Console.WriteLine("2. Dodaj recenzje");
+            Console.WriteLine("1. Zamów pizzę");
+            Console.WriteLine("2. Dodaj recenzję");
             Console.WriteLine("3. Wyjdź");
             Console.WriteLine();
             Console.Write("Twój wybór: ");
