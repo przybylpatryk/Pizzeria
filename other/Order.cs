@@ -24,5 +24,6 @@ namespace Pizzeria.order
             this.Pizza = Pizza;
             this.AssignedClient = AssignedClient;
         }
+
     }
 }

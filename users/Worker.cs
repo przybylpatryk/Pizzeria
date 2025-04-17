@@ -3,6 +3,7 @@ using System.IO;
 using Pizzeria.interfaces;
 using Pizzeria.menus;
 using Pizzeria.order;
+using Pizzeria.database;
 
 namespace Pizzeria.users
 {
@@ -10,95 +11,84 @@ namespace Pizzeria.users
     {
         public WorkerMenu workerMenu { get; set; }
         public Order ActiveOrder { get; set; }
+        public Database DB { get; set; }
 
         public Worker(string username, string password) : base(username, password, User.Role.Worker)
         {
             workerMenu = new WorkerMenu();
+            DB = new Database();
         }
 
         public void OrderPreview()
         {
-            if (ActiveOrder == null)
-            {
-                Console.WriteLine("Nie masz aktywnego zamówienia.");
-                return;
-            }
-            else
-            {
-                Console.WriteLine("Aktywne zamówienie:");
-                Console.WriteLine($"Zamówienie nr {ActiveOrder.Id}");
-                Console.WriteLine($"Pizza: {ActiveOrder.Pizza.Name}");
-                Console.WriteLine($"Data zamówienia: {ActiveOrder.DateOfOrder}");
-            }
-
-
+            DB.GetOrders();
+            Console.WriteLine("\nKliknij cokolwiek by kontynuować");
+            Console.ReadKey();
+            workerMenu.Menu(this);
         }
 
         public void TakeOrder()
         {
-            if (ActiveOrder != null)
-            {
-                Console.WriteLine("Masz już aktywne zamówienie.");
-                return;
-            }
-            if (Order.ActiveUntakenOrders.Count == 0)
-            {
-                Console.WriteLine("Wszystkie zamówienia są już zajęte lub wykonane.");
-                return;
-            }
-
             Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine("         Podejmij się zamówienia!      ");
             Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Wpisz 'esc' by anulować         ");
+            Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
-            foreach (var order in Order.ActiveUntakenOrders)
+
+            List<string> orderID = DB.GetOrderID();
+            if (orderID.Count == 0)
             {
-                Console.WriteLine($"Zamówienie nr {order.Id}");
-                Console.WriteLine($"Pizza: {order.Pizza.Name}");
-                Console.WriteLine($"Data zamówienia: {order.DateOfOrder}");
-                Console.WriteLine();
+                Console.WriteLine("Brak zamówień do podjęcia!");
+                Thread.Sleep(1500);
+                this.workerMenu.Menu(this);
+                return;
             }
-            Console.Write("Podaj numer zamówienia: ");
+            DB.GetOrdersForW(this);
+            Console.WriteLine();
+            Console.WriteLine("Podaj ID zamówienia, które chcesz podjąć:");
 
-
-            bool success = false;
-            while (!success)
+            string? orderW = Console.ReadLine();
+            while (true)
             {
-                string orderNumber = Console.ReadLine();
-                while (string.IsNullOrEmpty(orderNumber))
+                if(orderID.Contains(orderW))
                 {
-                    Console.Write("Pusto!, spróbuj ponownie: ");
-                    orderNumber = Console.ReadLine();
+                    break;
                 }
-                foreach(var order in Order.ActiveUntakenOrders)
+                else
                 {
-                    if (order.Id.ToString() == orderNumber)
-                    {
-                        ActiveOrder = order;
-                        ActiveOrder.AssignedWorker = this;
-                        Order.ActiveUntakenOrders.Remove(order);
-                        success = true;
-                        break;
-                    }
+                    Console.WriteLine("Niepoprawne ID zamówienia.");
+                    Thread.Sleep(1500);
+                    this.workerMenu.Menu(this);
+                    return;
                 }
+                
+                if (!string.IsNullOrEmpty(orderW) && orderW.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano dodawanie recenzji!");
+                    Thread.Sleep(1500);
+                    this.workerMenu.Menu(this);
+                    return;
+                }
+                else if (!string.IsNullOrEmpty(orderW))
+                {
+                    break;
+                }
+                Console.Write("Pusto!, spróbuj ponownie: ");
+                orderW = Console.ReadLine();
             }
-            Console.WriteLine($"Zamówienie nr {ActiveOrder.Id} zostało podjęte pomyślnie.");
+            Console.WriteLine();
+            DB.AddWOrder(orderW, this);
+            Console.WriteLine($"Zamówienie o ID {orderW} zostało podjęte!");
+            Thread.Sleep(1500);
+            this.workerMenu.Menu(this);
 
-            
+
         }
         public void MakePizza()
         {
-            if (ActiveOrder == null)
-            {
-                Console.WriteLine("Nie masz aktywnego zamówienia.");
-                return;
-            }
-            else
-            {
-                Console.WriteLine($"Pizza {ActiveOrder.Pizza.Name} została wykonana.");
-                ActiveOrder = null;
-            }
+            
         }
     }
 }

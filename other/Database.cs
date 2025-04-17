@@ -98,21 +98,6 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
-        //public List<Order> GetOrderPreview(int ID)
-        //{
-        //    string query = $"SELECT ID, RodzajPizzy, Data_zamowienia FROM zamowienia WHERE ID = {ID}";
-        //    MySqlCommand result = new MySqlCommand(query, Conn);
-        //    MySqlDataReader row = result.ExecuteReader();
-        //    List<Order> orders = new List<Order>();
-        //    while (row.Read())
-        //    {
-        //        Order order = new Order(row["ID"].ToString(), row["Rodzaj_pizzy"].ToString(), row["ID_pracownika"].ToString(), row["ID_klienta"].ToString(), row["Data_zamowienia"].ToString());
-        //        orders.Add(order);
-        //    }
-        //    row.Close();
-        //    return orders;
-        //}
-
         public void AddReview(string review, string clientUsername)
         {
             string query = $"INSERT INTO opinie (ID, Nazwa_klienta, opinia) VALUES (ID, '{clientUsername}', '{review}')";
@@ -136,11 +121,6 @@ namespace Pizzeria.database
 
         public void AddOrder(Pizza pizza, Client client)
         {
-            Thread.Sleep(1500);
-            Console.WriteLine(pizza.Name);
-            Thread.Sleep(1500);
-            Console.WriteLine();
-            Thread.Sleep(5000);
             string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.GetType().Name}', '{client.Username}', NOW())";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
@@ -151,6 +131,51 @@ namespace Pizzeria.database
             string query = $"UPDATE pracownicy SET Placa = Placa + {salary} WHERE Nazwa='{name}' AND Haslo = '{password}';";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
+        }
+
+        public void GetOrdersForW(Worker worker)
+        {
+            string query = $"SELECT * FROM zamowienia WHERE Zrobione = 0 AND Nazwa_pracownika != '{worker.Username}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                Console.WriteLine($"ID: {row["ID"]}, Zamówienie: {row["Rodzaj_pizzy"]}, Klient: {row["Nazwa_klienta"]}, Data: {Convert.ToDateTime(row["Data_zamowienia"]).ToString("yyyy-MM-dd")}");
+            }
+            row.Close();
+        }
+
+        public void GetOrders()
+        {
+            string query = "SELECT * FROM zamowienia;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                Console.WriteLine($"ID: {row["ID"]}, Zamówienie: {row["Rodzaj_pizzy"]}, Klient: {row["Nazwa_klienta"]}, Data: {Convert.ToDateTime(row["Data_zamowienia"]).ToString("yyyy-MM-dd")}");
+            }
+            row.Close();
+        }
+
+        public void AddWOrder(string ID, Worker worker)
+        {
+            string query = $"UPDATE zamowienia SET Nazwa_pracownika = '{worker.Username}' WHERE ID = {ID};";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
+
+        public List<string> GetOrderID()
+        {
+            List<string> orders = new List<string>();
+            string query = "SELECT ID FROM zamowienia;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                orders.Add(row["ID"].ToString());
+            }
+            row.Close();
+            return orders;
         }
     }
 }
