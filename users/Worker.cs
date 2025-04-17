@@ -37,7 +37,7 @@ namespace Pizzeria.users
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
 
-            List<string> orderID = DB.GetOrderID();
+            List<string> orderID = DB.GetOrderIDForW(this);
             if (orderID.Count == 0)
             {
                 Console.WriteLine("Brak zamówień do podjęcia!");
@@ -52,7 +52,7 @@ namespace Pizzeria.users
             string? orderW = Console.ReadLine();
             while (true)
             {
-                if(orderID.Contains(orderW))
+                if (orderID.Contains(orderW))
                 {
                     break;
                 }
@@ -63,7 +63,7 @@ namespace Pizzeria.users
                     this.workerMenu.Menu(this);
                     return;
                 }
-                
+
                 if (!string.IsNullOrEmpty(orderW) && orderW.ToLower() == "esc")
                 {
                     Console.WriteLine("Anulowano dodawanie recenzji!");
@@ -88,7 +88,74 @@ namespace Pizzeria.users
         }
         public void MakePizza()
         {
-            
+            List<string> orderByW = DB.GetOrderByW();
+            if (orderByW.Contains(this.Username))
+            {
+                Console.Clear();
+                Console.WriteLine("///////////////////////////////////////////");
+                Console.WriteLine("         Stwórz pizzę!      ");
+                Console.WriteLine("///////////////////////////////////////////");
+                Console.WriteLine();
+                Console.WriteLine("Napewno? (Y/N)");
+
+                string? choice = Console.ReadLine().ToLower();
+                while (choice != "y" && choice != "n")
+                {
+                    Console.Write("Źle, Y lub N: ");
+                    choice = Console.ReadLine();
+                }
+                if (choice == "y")
+                {
+                    Console.Write("\nZaczynasz robić placek");
+                    Thread.Sleep(500);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(500);
+                    }
+                    Console.Write("\nDodajesz sos");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(500);
+                    }
+                    Console.Write("\nDodajesz ser");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(500);
+                    }
+                    Console.Write("\nDodajesz dodatki");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(500);
+                    }
+                    Console.Write("\nPieczesz");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(500);
+                    }
+                    Console.Write("\nPizza gotowa!");
+                    DB.CompleteOrder(this);
+                    Console.WriteLine("Stworzono pizzę!");
+                    Thread.Sleep(1500);
+                    this.workerMenu.Menu(this);
+                }
+                else if (choice == "n")
+                {
+                    Console.WriteLine("Anulowano tworzenie pizzy!");
+                    Thread.Sleep(1500);
+                    this.workerMenu.Menu(this);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nie masz zamówienia do zrealizowania!");
+                Thread.Sleep(1500);
+                this.workerMenu.Menu(this);
+            }
         }
     }
 }

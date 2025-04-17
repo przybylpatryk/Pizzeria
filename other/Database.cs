@@ -177,5 +177,40 @@ namespace Pizzeria.database
             row.Close();
             return orders;
         }
+
+        public List<string> GetOrderByW()
+        {
+            List<string> orders = new List<string>();
+            string query = "SELECT Nazwa_pracownika FROM zamowienia WHERE Zrobione = 0;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                orders.Add(row["Nazwa_pracownika"].ToString());
+            }
+            row.Close();
+            return orders;
+        }
+
+        public void CompleteOrder(Worker worker)
+        {
+            string query = $"UPDATE zamowienia SET Zrobione = 1 WHERE Nazwa_pracownika = '{worker.Username}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
+
+        public List<string> GetOrderIDForW(Worker worker)
+        {
+            List<string> orders = new List<string>();
+            string query = $"SELECT ID FROM zamowienia WHERE Nazwa_pracownika != '{worker.Username}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                orders.Add(row["ID"].ToString());
+            }
+            row.Close();
+            return orders;
+        }
     }
 }

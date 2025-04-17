@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2025 at 08:07 PM
+-- Generation Time: Apr 17, 2025 at 06:31 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.0.30
 
@@ -80,7 +80,8 @@ CREATE TABLE `opinie` (
 --
 
 INSERT INTO `opinie` (`ID`, `Nazwa_klienta`, `opinia`) VALUES
-(1, 'Gordon', 'lepsze niż piccolo bez kappy');
+(1, 'Gordon', 'lepsze niż piccolo bez kappy'),
+(4, 'Jonatan', 'pracownicy krzyczeli \"chicken jockey\", 10/10 będe wracać');
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,8 @@ CREATE TABLE `pracownicy` (
 
 INSERT INTO `pracownicy` (`ID`, `Nazwa`, `Haslo`, `Placa`) VALUES
 (3, 'CiastoMaster', 'Placek!90', 5000),
-(4, 'GruszkaMaster', 'Sk1b1d!', 6300);
+(4, 'GruszkaMaster', 'Sk1b1d!', 6300),
+(6, 'Mango', 'M@ngo1', 0);
 
 -- --------------------------------------------------------
 
@@ -114,15 +116,17 @@ CREATE TABLE `zamowienia` (
   `Rodzaj_pizzy` varchar(30) NOT NULL,
   `Nazwa_pracownika` varchar(30) NOT NULL,
   `Nazwa_klienta` varchar(30) NOT NULL,
-  `Data_zamowienia` date NOT NULL
+  `Data_zamowienia` date NOT NULL,
+  `Zrobione` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `zamowienia`
 --
 
-INSERT INTO `zamowienia` (`ID`, `Rodzaj_pizzy`, `Nazwa_pracownika`, `Nazwa_klienta`, `Data_zamowienia`) VALUES
-(1, 'Salami', '1', '1', '2025-04-06');
+INSERT INTO `zamowienia` (`ID`, `Rodzaj_pizzy`, `Nazwa_pracownika`, `Nazwa_klienta`, `Data_zamowienia`, `Zrobione`) VALUES
+(9, 'JohnnysSpecial', 'Mango', 'Jonatan', '2025-04-17', 1),
+(10, 'Margherita', 'Mango', 'Jonatan', '2025-04-17', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -178,19 +182,19 @@ ALTER TABLE `klienci`
 -- AUTO_INCREMENT for table `opinie`
 --
 ALTER TABLE `opinie`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
