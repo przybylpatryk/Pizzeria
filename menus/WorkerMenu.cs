@@ -16,7 +16,8 @@ namespace Pizzeria.menus
             Console.WriteLine("1. Podejmij się zamówienia");
             Console.WriteLine("2. Stwórz pizzę");
             Console.WriteLine("3. Przeglądaj zamówienia");
-            Console.WriteLine("4. Wyjdź");
+            Console.WriteLine("4. Wyloguj");
+            Console.WriteLine("5. Wyjdź");
             Console.WriteLine();
             Console.Write("Twój wybór: ");
 
@@ -40,6 +41,12 @@ namespace Pizzeria.menus
                     worker.OrderPreview();
                     break;
                 case "4":
+                    Console.WriteLine("Wylogowywanie...");
+                    Thread.Sleep(1500);
+                    LoggingMenu LM = new LoggingMenu();
+                    LM.Menu();
+                    break;
+                case "5":
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
                     return;

@@ -15,8 +15,12 @@ namespace Pizzeria.menus
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
             Console.WriteLine("1. Zamów pizzę");
-            Console.WriteLine("2. Dodaj recenzję");
-            Console.WriteLine("3. Wyjdź");
+            Console.WriteLine("2. Odbierz pizze");
+            Console.WriteLine("3. Zobacz zamówienia");
+            Console.WriteLine("4. Dodaj recenzję");
+            Console.WriteLine("5. Zobacz recenzje");
+            Console.WriteLine("6. Wyloguj");
+            Console.WriteLine("7. Wyjdź");
             Console.WriteLine();
             Console.Write("Twój wybór: ");
 
@@ -34,9 +38,24 @@ namespace Pizzeria.menus
                     client.CreateOrder();
                     break;
                 case "2":
-                    client.AddReview();
+                    client.GetOrder();
                     break;
                 case "3":
+                    client.GetOrders();
+                    break;
+                case "4":
+                    client.AddReview();
+                    break;
+                case "5":
+                    client.GetReviews();
+                    break;
+                case "6":
+                    Console.WriteLine("Wylogowywanie...");
+                    Thread.Sleep(1500);
+                    LoggingMenu LM = new LoggingMenu();
+                    LM.Menu();
+                    break;
+                case "7":
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
                     return;
