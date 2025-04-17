@@ -22,12 +22,6 @@ namespace Pizzeria.users
 
 		public void CreateOrder()
 		{
-			if(ActiveOrder != null)
-            {
-                Console.WriteLine("Można mieć tylko jedno aktywne zamówienie na raz!");
-                Console.WriteLine("Prosimy o cierpliwość.");
-                return;
-            }
             Console.Clear();
             Console.WriteLine("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
             Console.WriteLine("                                         Wybierz jedną z pizz                                                    ");
@@ -113,11 +107,19 @@ namespace Pizzeria.users
                 
             }
 
+            Console.Write("\nPracujemy nad tym");
+            Thread.Sleep(500);
+            for(int i = 0; i < 3; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(500);
+            }
             ActiveOrder = new Order(pizza, this);
             Order.ActiveUntakenOrders.Add(ActiveOrder);
-            Console.WriteLine($"Zamówienie zostało dodane! {pizza.GetType().Name} w rozmiarze {size}");
-            this.clientMenu.Menu(this);
             DB.AddOrder(pizza, this);
+            Console.WriteLine($"\nZamówienie zostało dodane! {pizza.GetType().Name} w rozmiarze {size}");
+            Thread.Sleep(1500);
+            this.clientMenu.Menu(this);
         }
 
         public void AddReview()

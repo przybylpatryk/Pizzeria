@@ -134,21 +134,14 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
-        //public List<Order> GetOrder()
-        //{
-        //    string query = $"SELECT * FROM zamowienia";
-        //    MySqlCommand result = new MySqlCommand(query, Conn);
-        //    MySqlDataReader row = result.ExecuteReader();
-        //    while (row.Read())
-        //    {
-        //        Console.WriteLine($"ID: {row["ID"]}, Rodzaj pizzy: {row["Rodzaj_pizzy"]}, Data zamówienia: {row["Data_zamowienia"]}");
-        //    }
-        //    row.Close();
-        //}
-
         public void AddOrder(Pizza pizza, Client client)
         {
-            string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.Name}', '{client.Username}', NOW())";
+            Thread.Sleep(1500);
+            Console.WriteLine(pizza.Name);
+            Thread.Sleep(1500);
+            Console.WriteLine();
+            Thread.Sleep(5000);
+            string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.GetType().Name}', '{client.Username}', NOW())";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }
