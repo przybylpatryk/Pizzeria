@@ -141,7 +141,7 @@ namespace Pizzeria.users
                 Console.Write("\nPusto, lub nie ma takiego użytkownika: ");
                 username = Console.ReadLine();
             }
-            Console.Write("\nHasło nowego pracownika: ");
+            Console.Write("\nHasło pracownika: ");
 
             //sprawdzanie czy użytkownik nie klika poprostu entera, lub czy też hasło nie jest za słabe
             string? password = Console.ReadLine();
@@ -181,6 +181,75 @@ namespace Pizzeria.users
             }
             DB.IncreaseSalary(username, password, salary);
             Console.WriteLine($"Zwiększono pensje pracownika {username}!");
+            Thread.Sleep(1500);
+            this.adminMenu.Menu(this);
+        }
+
+        public void DecreaseSalary()
+        {
+            Console.Clear();
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("      Prosimy o podanie informacji owego pracownika      ");
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Wpisz 'esc' by anulować         ");
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine();
+            Console.Write("Podaj pracownika: ");
+
+            //sprawdzanie czy użytkownik nie klika poprostu entera, lub czy też nazwa nie jest zajęta
+            string? username = Console.ReadLine();
+            while (string.IsNullOrEmpty(username) || isusername(username))
+            {
+                if (username.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano zmniejszania pensji!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
+                Console.Write("\nPusto, lub nie ma takiego użytkownika: ");
+                username = Console.ReadLine();
+            }
+            Console.Write("\nHasło pracownika: ");
+
+            //sprawdzanie czy użytkownik nie klika poprostu entera, lub czy też hasło nie jest za słabe
+            string? password = Console.ReadLine();
+            while (string.IsNullOrEmpty(password) || ispassword(username, password))
+            {
+                if (password.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano zmiejszania pensji!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
+                Console.Write("\nPusto, lub użytkownik nie ma takiego hasła: ");
+                password = Console.ReadLine();
+            }
+
+            int salary;
+            while (true)
+            {
+                Console.Write("\nJak bardzo pensja się zmniejsza?: ");
+                string? input = Console.ReadLine();
+
+                if (input != null && input.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano zmiejszania pensji!");
+                    Thread.Sleep(1500);
+                    this.adminMenu.Menu(this);
+                    return;
+                }
+
+                if (int.TryParse(input, out salary))
+                {
+                    break; //wychodzi z pętli jak jest faktyczny udany parse
+                }
+
+                Console.WriteLine("Nieprawidłowa wartość, spróbuj ponownie.");
+            }
+            DB.DecreaseSalary(username, password, salary);
+            Console.WriteLine($"Zmniejszono pensje pracownika {username}!");
             Thread.Sleep(1500);
             this.adminMenu.Menu(this);
         }

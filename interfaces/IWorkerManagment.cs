@@ -9,4 +9,6 @@ public interface IWorkerManagment
     protected void HireWorker();
     //zwiękasznie pensji pracownika
     protected void IncreaseSalary();
+    //zmiejszenie pensji pracownika
+    protected void DecreaseSalary();
 }

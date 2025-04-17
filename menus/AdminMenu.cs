@@ -15,7 +15,8 @@ namespace Pizzeria.menus
             Console.WriteLine("1. Dodaj pracownika");
             Console.WriteLine("2. Zwolnij pracownika");
             Console.WriteLine("3. Podnieś pensje");
-            Console.WriteLine("4. Wyjdź");
+            Console.WriteLine("4. Obniż pensje");
+            Console.WriteLine("5. Wyjdź");
             Console.WriteLine();
             Console.Write("Twój wybór: ");
 
@@ -39,6 +40,9 @@ namespace Pizzeria.menus
                     admin.IncreaseSalary();
                     break;
                 case "4":
+                    admin.DecreaseSalary();
+                    break;
+                case "5":
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
                     return;

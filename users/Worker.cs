@@ -9,6 +9,7 @@ namespace Pizzeria.users
 {
     public class Worker : User, IOrderManagment
     {
+        public string Salary { get; set; }
         public WorkerMenu workerMenu { get; set; }
         public Order ActiveOrder { get; set; }
         public Database DB { get; set; }

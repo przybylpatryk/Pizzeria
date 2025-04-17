@@ -107,7 +107,7 @@ namespace Pizzeria.database
 
         public void HireWorker(string name, string password)
         {
-            string query = $"INSERT INTO pracownicy (ID, Nazwa, Haslo) VALUES (NULL, '{name}', '{password}')";
+            string query = $"INSERT INTO pracownicy (ID, Nazwa, Haslo, Placa) VALUES (NULL, '{name}', '{password}', 5000)";
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }
@@ -211,6 +211,13 @@ namespace Pizzeria.database
             }
             row.Close();
             return orders;
+        }
+
+        public void DecreaseSalary(string name, string password, int salary)
+        {
+            string query = $"UPDATE pracownicy SET Placa = Placa - {salary} WHERE Nazwa='{name}' AND Haslo = '{password}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
         }
     }
 }
