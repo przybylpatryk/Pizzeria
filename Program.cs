@@ -12,6 +12,6 @@ namespace Pizzeria
             Database DB = new Database();
             LoggingMenu LM = new LoggingMenu();
             LM.Menu();
-    }
+        }
     }
 }
