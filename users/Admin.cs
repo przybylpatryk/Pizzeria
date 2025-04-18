@@ -7,7 +7,7 @@ using Pizzeria.database;
 
 namespace Pizzeria.users
 {
-    public class Admin : User, IOrderManagment, IWorkerManagment
+    public class Admin : User, IWorkerManagment
     {
 
         public AdminMenu adminMenu { get; set; }

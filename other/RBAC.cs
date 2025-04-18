@@ -3,7 +3,6 @@ using Pizzeria.users;
 using Pizzeria.menus;
 using Pizzeria.interfaces;
 using Pizzeria.database;
-using Pizzeria.menus;
 
 namespace Pizzeria.rbac
 {
