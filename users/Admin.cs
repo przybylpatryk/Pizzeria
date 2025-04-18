@@ -13,12 +13,14 @@ namespace Pizzeria.users
         public AdminMenu adminMenu { get; set; }
         public Database DB { get; set; }
 
+        //konstruktor klasy Admin
         public Admin(string username, string password) : base(username, password, User.Role.Admin)
         {
             adminMenu = new AdminMenu();
             DB = new Database();
         }
 
+        //zatrudnia pracownika
         public void HireWorker()
         {
             Console.Clear();
@@ -38,7 +40,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano dodawanie pracownika!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("Pusto, lub ta nazwa jest już zajęta, spróbuj ponownie: ");
@@ -54,7 +56,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano dodawanie pracownika!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("Pusto, lub za słabe hasło, spróbuj ponownie: ");
@@ -64,9 +66,10 @@ namespace Pizzeria.users
             DB.HireWorker(username, password);
             Console.WriteLine("Dodano pracownika pomyślnie!");
             Thread.Sleep(1500);
-            this.adminMenu.Menu(this);
+            adminMenu.Menu(this);
         }
 
+        //zwalnia pracownika
         public void FireWorker()
         {
             Console.Clear();
@@ -86,7 +89,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano usuwanie pracownika!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("Pusto, lub nie ma takiego użytkownika: ");
@@ -102,7 +105,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano usuwanie pracownika!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("Pusto, lub użytkownik nie ma takiego hasła: ");
@@ -113,9 +116,10 @@ namespace Pizzeria.users
             Console.WriteLine("Usunięto pracownika pomyślnie!");
             Console.WriteLine("Życzymy powodzenia w przyszłej karierze!");
             Thread.Sleep(1500);
-            this.adminMenu.Menu(this);
+            adminMenu.Menu(this);
         }
 
+        //zwiększa pensje pracownika
         public void IncreaseSalary()
         {
             Console.Clear();
@@ -135,7 +139,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zwiększenia pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("\nPusto, lub nie ma takiego użytkownika: ");
@@ -151,7 +155,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zwiększania pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("\nPusto, lub użytkownik nie ma takiego hasła: ");
@@ -168,7 +172,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zwiększania pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
 
@@ -182,9 +186,10 @@ namespace Pizzeria.users
             DB.IncreaseSalary(username, password, salary);
             Console.WriteLine($"Zwiększono pensje pracownika {username}!");
             Thread.Sleep(1500);
-            this.adminMenu.Menu(this);
+            adminMenu.Menu(this);
         }
 
+        //zmniejsza pensje pracownika
         public void DecreaseSalary()
         {
             Console.Clear();
@@ -204,7 +209,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zmniejszania pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("\nPusto, lub nie ma takiego użytkownika: ");
@@ -220,7 +225,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zmiejszania pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
                 Console.Write("\nPusto, lub użytkownik nie ma takiego hasła: ");
@@ -237,7 +242,7 @@ namespace Pizzeria.users
                 {
                     Console.WriteLine("Anulowano zmiejszania pensji!");
                     Thread.Sleep(1500);
-                    this.adminMenu.Menu(this);
+                    adminMenu.Menu(this);
                     return;
                 }
 
@@ -251,9 +256,10 @@ namespace Pizzeria.users
             DB.DecreaseSalary(username, password, salary);
             Console.WriteLine($"Zmniejszono pensje pracownika {username}!");
             Thread.Sleep(1500);
-            this.adminMenu.Menu(this);
+            adminMenu.Menu(this);
         }
 
+        //sprawdza czy nazwa użytkownika nie jest zajęta
         public static bool isnotfree(string username)
         {
             Database db = new Database();
@@ -270,6 +276,7 @@ namespace Pizzeria.users
             }
         }
 
+        //sprawdza czy hasło nie pasuje do Regex
         public static bool notmatches(string password)
         {
             Regex regex = new Regex(@"^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\[\]:;\'<>,.?/\\|`~-]).{5,}$");
@@ -283,6 +290,7 @@ namespace Pizzeria.users
             }
         }
 
+        //sprawdza czy użytkownik istnieje
         public static bool isusername(string username)
         {
             Database db = new Database();
@@ -299,6 +307,7 @@ namespace Pizzeria.users
             }
         }
 
+        //sprawdza czy hasło jest poprawne
         public static bool ispassword(string username, string password)
         {
             Database db = new Database();

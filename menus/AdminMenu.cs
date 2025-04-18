@@ -5,6 +5,7 @@ namespace Pizzeria.menus
 {
     public class AdminMenu()
     {
+        //metoda wyświetlająca menu dla admina
         public void Menu(Admin admin)
         {
             Console.Clear();

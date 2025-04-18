@@ -1,6 +1,7 @@
 ﻿using System;
 namespace Pizzeria.pizza
 {
+    //enum z możliwymi rozmiarami pizzy
     public enum size
     {
         Small,
@@ -8,6 +9,7 @@ namespace Pizzeria.pizza
         Large,
         ExtraLarge
     }
+    //enum z możliwymi dodatkami do pizzy
     public enum toppings
     {
         salami,
@@ -30,6 +32,7 @@ namespace Pizzeria.pizza
         public List<toppings> Toppings { get; set; }
         public decimal Price { get; set; }
 
+        //konstruktor klasy Pizza
         public Pizza(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null)
         {
             Toppings = new List<toppings>();
@@ -43,6 +46,7 @@ namespace Pizzeria.pizza
     {
         public string Name { get; set; }
         public size Size { get; set; }
+        //konstruktor klasy Margherita dziedziczący po konstruktorze klasy Pizza
         public Margherita(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Toppings = new List<toppings>();
@@ -78,6 +82,8 @@ namespace Pizzeria.pizza
     {
         public string Name { get; set; }
         public size Size { get; set; }
+
+        //konstruktor klasy Pepperoni dziedziczący po konstruktorze klasy Pizza
         public Pepperoni(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Toppings = new List<toppings>();
@@ -115,6 +121,7 @@ namespace Pizzeria.pizza
     {
         public string Name { get; set; }
         public size Size { get; set; }
+        //konstruktor klasy Hawaiian dziedziczący po konstruktorze klasy Pizza
         public Hawaiian(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Toppings = new List<toppings>();
@@ -152,6 +159,7 @@ namespace Pizzeria.pizza
     {
         public string Name { get; set; }
         public size Size { get; set; }
+        //konstruktor klasy Capricciosa dziedziczący po konstruktorze klasy Pizza
         public Capricciosa(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Toppings = new List<toppings>();
@@ -190,6 +198,7 @@ namespace Pizzeria.pizza
     {
         public string Name { get; set; }
         public size Size { get; set; }
+        //konstruktor klasy JohnnysSpecial dziedziczący po konstruktorze klasy Pizza
         public JohnnysSpecial(size Size, bool Cheese = true, bool TomatoSauce = true, List<toppings> Toppings = null) : base(Size, Cheese, TomatoSauce, Toppings)
         {
             Toppings = new List<toppings>();

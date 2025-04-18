@@ -19,6 +19,7 @@ namespace Pizzeria.order
             get { return date.Date; }
             set { date = value.Date; }
         }
+        //konstruktor klasy Order
         public Order(Pizza Pizza, Client AssignedClient)
         {
             this.Pizza = Pizza;

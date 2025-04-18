@@ -14,13 +14,15 @@ namespace Pizzeria.users
         public Database DB { get; set; }
         public Order ActiveOrder { get; set; }
 
+        //konstruktor klasy Client
         public Client(string username, string password) : base(username, password, User.Role.Client)
         {
             clientMenu = new ClientMenu();
             DB = new Database();
         }
 
-		public void CreateOrder()
+        //metoda służąca do towrzenia zamówienia
+        public void CreateOrder()
 		{
             Console.Clear();
             Console.WriteLine("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
@@ -36,17 +38,23 @@ namespace Pizzeria.users
             Console.WriteLine("6.Anuluj");
             string? choice = Console.ReadLine();
             Console.WriteLine();
+
+            //sprawdza czy użytkownik nie dał nic
             while (string.IsNullOrEmpty(choice))
             {
                 Console.Write("Pusto!, spróbuj ponownie: ");
                 choice = Console.ReadLine();
             }
-            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
+
+            //sprawdza czy użytkownik podał poprawną wartość
+            if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
             {
                 Console.WriteLine("Niepoprawny wybór, spróbuj ponownie.");
                 Thread.Sleep(1500);
                 CreateOrder();
             }
+
+            //anuluje zamówienia w przypadku '6'
             if(choice == "6")
             {
                 Console.WriteLine("Anulowano zamówienie!");
@@ -54,13 +62,17 @@ namespace Pizzeria.users
                 clientMenu.Menu(this);
             }
             Console.WriteLine("Podaj rozmiar pizzy (Mała, Średnia, Duża, Bardzo Duża)");
+
+            //sprawdza czy użytkownik podał poprawny rozmiar pizzy
             string? sizeInput = Console.ReadLine().ToLower();
             while (string.IsNullOrEmpty(sizeInput) || (sizeInput != "mała" && sizeInput != "średnia" && sizeInput != "duża" && sizeInput != "bardzo duża")) 
             {
                 Console.Write("Niepoprawny rozmiar pizzy, spróbuj ponownie (Mała, Średnia, Duża, Bardzo Duża): ");
                 sizeInput = Console.ReadLine().ToLower();
             }
-            switch(sizeInput)
+
+            //zmienia rozmiar pizzy na poprawną wartość dla enuma
+            switch (sizeInput)
             {
                 case "mała":
                     sizeInput = "Small";
@@ -75,6 +87,7 @@ namespace Pizzeria.users
                     sizeInput = "ExtraLarge";
                     break;
             }
+            //Konweruje stringa na enuma
             if(Enum.TryParse(sizeInput, out size size))
             {
                 Console.WriteLine($"Wybrano rozmiar pizzy: {size}");
@@ -85,7 +98,7 @@ namespace Pizzeria.users
                 Thread.Sleep(1500);
                 CreateOrder();
             }
-
+            //przypisuje wybraną pizze do zmiennej pizza
             Pizza pizza = null;
             switch (choice)
             {
@@ -119,9 +132,10 @@ namespace Pizzeria.users
             DB.AddOrder(pizza, this);
             Console.WriteLine($"\nZamówienie zostało dodane! {pizza.GetType().Name} w rozmiarze {size}");
             Thread.Sleep(1500);
-            this.clientMenu.Menu(this);
+            clientMenu.Menu(this);
         }
 
+        //metoda służąca do dodawania recenzji
         public void AddReview()
         {
             Console.Clear();
@@ -136,6 +150,7 @@ namespace Pizzeria.users
             string? opinion = Console.ReadLine();
             while (true)
             {
+                //sprawdza czy użytkownik podał 'esc' i anuluje dodawanie recenzji
                 if (!string.IsNullOrEmpty(opinion) && opinion.ToLower() == "esc")
                 {
                     Console.WriteLine("Anulowano dodawanie recenzji!");
@@ -157,6 +172,7 @@ namespace Pizzeria.users
             clientMenu.Menu(this);
         }
 
+        //metoda służąca do przeglądania recenzji
         public void GetReviews()
         {
             Console.Clear();
@@ -171,6 +187,7 @@ namespace Pizzeria.users
             clientMenu.Menu(this);
         }
 
+        //metoda służąca do odbierania zamówienia
         public void GetOrderForC()
         {
             Console.Clear();
@@ -180,11 +197,13 @@ namespace Pizzeria.users
             Console.WriteLine();
 
             List<string> orderID = DB.GetOrderIDForC(this);
+
+            //sprawdza czy są zamówienia dostępne do odbioru
             if (orderID.Count == 0)
             {
                 Console.WriteLine("Brak zamówień do przyjęcia!");
                 Thread.Sleep(1500);
-                this.clientMenu.Menu(this);
+                clientMenu.Menu(this);
                 return;
             }
 
@@ -195,23 +214,22 @@ namespace Pizzeria.users
             string? orderW = Console.ReadLine();
             while (true)
             {
-                if (orderID.Contains(orderW))
-                {
-                    
-                }
-                else
+
+                //sprawdza poprawność ID, które podał użytkownik
+                if (!orderID.Contains(orderW))
                 {
                     Console.WriteLine("Niepoprawne ID zamówienia.");
                     Thread.Sleep(1500);
-                    this.clientMenu.Menu(this);
+                    clientMenu.Menu(this);
                     return;
                 }
 
+                //sprawdza czy użytkownik wpisał 'esc' i wtedy anuluje akcję
                 if (!string.IsNullOrEmpty(orderW) && orderW.ToLower() == "esc")
                 {
                     Console.WriteLine("Anulowano!");
                     Thread.Sleep(1500);
-                    this.clientMenu.Menu(this);
+                    clientMenu.Menu(this);
                     return;
                 }
                 else if (!string.IsNullOrEmpty(orderW))
@@ -225,9 +243,10 @@ namespace Pizzeria.users
             DB.RecieveOrder(orderW, this);
             Console.WriteLine($"Zamówienie o ID {orderW} zostało przyjęte!");
             Thread.Sleep(1500);
-            this.clientMenu.Menu(this);
+            clientMenu.Menu(this);
         }
 
+        //metoda służąca do przeglądania zamówienia
         public void OrderPreview()
         {
             Console.Clear();

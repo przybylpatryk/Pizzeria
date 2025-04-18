@@ -10,11 +10,6 @@ namespace Pizzeria
         static void Main(string[] args)
         {
             Database DB = new Database();
-            //List<Order> orders = DB.GetOrderPreview(1);
-            //foreach (Order order in orders)
-            //{
-            //    Console.WriteLine($"ID: {order.ID}, Rodzaj Pizzy: {order.RodzajPizzy}, Data zamówienia: {order.DataZamowienia}");
-            //}
             LoggingMenu LM = new LoggingMenu();
             LM.Menu();
     }

@@ -19,7 +19,7 @@ namespace Pizzeria.database
     public class Database
     {
         //dane do łączenia sie z bazą
-        private readonly string connectionString = "Server=localhost;Database=pizzeria;User=root;Password=;";
+        private readonly string connectionString = "Server=localhost;Database=pizzeria;User=root;Password=student;";
 
         public MySqlConnection Conn { get; set; }
 
@@ -57,6 +57,7 @@ namespace Pizzeria.database
             return workers;
         }
 
+        //metoda wyświetlająca wszystkich klientów
         public List<Client> GetClients()
         {
             List<Client> clients = new List<Client>();
@@ -74,6 +75,7 @@ namespace Pizzeria.database
             return clients;
         }
 
+        //metoda wyświetlająca wszystkich adminów
         public List<Admin> GetAdmins()
         {
             List<Admin> admins = new List<Admin>();
@@ -91,6 +93,7 @@ namespace Pizzeria.database
             return admins;
         }
 
+        //metoda dodająca nowego klienta do bazy
         public void AddClient(string username, string password)
         {
             string query = $"INSERT INTO klienci (ID, Nazwa, Haslo) VALUES (NULL, '{username}', '{password}')";
@@ -98,6 +101,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda dodająca opinie do bazy
         public void AddReview(string review, string clientUsername)
         {
             string query = $"INSERT INTO opinie (ID, Nazwa_klienta, opinia) VALUES (ID, '{clientUsername}', '{review}')";
@@ -105,6 +109,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda dodająca nowego pracownika do bazy
         public void HireWorker(string name, string password)
         {
             string query = $"INSERT INTO pracownicy (ID, Nazwa, Haslo, Placa) VALUES (NULL, '{name}', '{password}', 5000)";
@@ -112,6 +117,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda usuwająca pracownika z bazy
         public void FireWorker(string name, string password)
         {
             string query = $"DELETE FROM pracownicy WHERE Nazwa='{name}' AND Haslo = '{password}';";
@@ -119,6 +125,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda dodająca zamówienie do bazy
         public void AddOrder(Pizza pizza, Client client)
         {
             string query = $"INSERT INTO zamowienia (ID, Rodzaj_pizzy, Nazwa_klienta, Data_zamowienia) VALUES (ID, '{pizza.GetType().Name}', '{client.Username}', NOW())";
@@ -126,6 +133,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda zwiększająca pensje pracownika
         public void IncreaseSalary(string name, string password, int salary)
         {
             string query = $"UPDATE pracownicy SET Placa = Placa + {salary} WHERE Nazwa='{name}' AND Haslo = '{password}';";
@@ -133,6 +141,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda wyświetlająca zamówienia dostępne dla pracowników
         public void GetOrdersForW(Worker worker)
         {
             string query = $"SELECT * FROM zamowienia WHERE Zrobione = 0 AND Nazwa_pracownika != '{worker.Username}';";
@@ -145,6 +154,7 @@ namespace Pizzeria.database
             row.Close();
         }
 
+        //metoda wyświetlająca wszystkie zamówienia
         public void GetOrders()
         {
             string query = "SELECT * FROM zamowienia;";
@@ -157,6 +167,7 @@ namespace Pizzeria.database
             row.Close();
         }
 
+        //metoda przypisująca zamówienie do pracownika
         public void AddWOrder(string ID, Worker worker)
         {
             string query = $"UPDATE zamowienia SET Nazwa_pracownika = '{worker.Username}' WHERE ID = {ID};";
@@ -164,6 +175,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda zwracająca ID zamówień
         public List<string> GetOrderID()
         {
             List<string> orders = new List<string>();
@@ -178,6 +190,7 @@ namespace Pizzeria.database
             return orders;
         }
 
+        //metoda sprawdzająca czy pracownik ma podjęte zamówienie
         public List<string> GetOrderByW()
         {
             List<string> orders = new List<string>();
@@ -192,6 +205,7 @@ namespace Pizzeria.database
             return orders;
         }
 
+        //metoda zmieniająca status zamówienia na zrobione w bazie
         public void CompleteOrder(Worker worker)
         {
             string query = $"UPDATE zamowienia SET Zrobione = 1 WHERE Nazwa_pracownika = '{worker.Username}';";
@@ -199,6 +213,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda zwracająca ID zamówień, które nie zostały podjęte przez innych pracowników
         public List<string> GetOrderIDForW(Worker worker)
         {
             List<string> orders = new List<string>();
@@ -213,6 +228,7 @@ namespace Pizzeria.database
             return orders;
         }
 
+        //metoda zmniejszająca pensje pracownika w bazie
         public void DecreaseSalary(string name, string password, int salary)
         {
             string query = $"UPDATE pracownicy SET Placa = Placa - {salary} WHERE Nazwa='{name}' AND Haslo = '{password}';";
@@ -220,6 +236,7 @@ namespace Pizzeria.database
             result.ExecuteNonQuery();
         }
 
+        //metoda wyświetlająca zamówienia klienta
         public void GetOrderForC(Client client)
         {
             string query = $"SELECT * FROM zamowienia WHERE Nazwa_klienta = '{client.Username}';";
@@ -232,6 +249,7 @@ namespace Pizzeria.database
             row.Close();
         }
 
+        //metoda wyświetlająca opinie
         public void GetReviews()
         {
             string query = "SELECT * FROM opinie;";
@@ -244,6 +262,7 @@ namespace Pizzeria.database
             row.Close();
         }
 
+        //metoda zwracająca ID zamówień, które zostały zrealizowane
         public List<string> GetOrderIDForC(Client client)
         {
             List<string> orders = new List<string>();
@@ -258,6 +277,7 @@ namespace Pizzeria.database
             return orders;
         }
 
+        //metoda wyświetlająca zamówienia klienta, które zostały zrealizowane
         public void GetOrderInfoForC(Client client)
         {
             string query = $"SELECT * FROM zamowienia WHERE Nazwa_klienta = '{client.Username}' AND Zrobione = 1;";
@@ -270,6 +290,7 @@ namespace Pizzeria.database
             row.Close();
         }
 
+        //metoda usuwająca zamówienie z bazy
         public void RecieveOrder(string ID, Client client)
         {
             string query = $"DELETE FROM zamowienia WHERE ID = '{ID}' AND Nazwa_klienta = '{client.Username}' AND Zrobione = 1;";

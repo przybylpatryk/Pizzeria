@@ -7,6 +7,7 @@ namespace Pizzeria.menus
 {
     public class ClientMenu
     {
+        //metoda wyświetlająca menu dla klienta
         public void Menu(Client client = null)
         {
             Console.Clear();

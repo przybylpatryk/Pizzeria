@@ -6,6 +6,7 @@ namespace Pizzeria.menus
 {
     public class WorkerMenu
     {
+        //metoda wyświetlająca menu dla pracownika
         public void Menu(Worker worker = null)
         {
             Console.Clear();

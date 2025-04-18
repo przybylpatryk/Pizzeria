@@ -20,6 +20,7 @@ public class LoggingMenu
         DB = new Database();
         Rbac = new RBAC();
     }
+    //metoda wyświetlająca menu przy logowaniu
     public void Menu()
     {
         Console.Clear();

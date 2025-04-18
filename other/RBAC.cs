@@ -8,6 +8,7 @@ namespace Pizzeria.rbac
 {
     public class RBAC
     {
+        //metoda przypisująca role użytkownikowi
         public bool CanAccess(User user, string resource)
         {
             switch (resource)

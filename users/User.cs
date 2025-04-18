@@ -4,6 +4,7 @@ namespace Pizzeria.users
 {
     public class User
     {
+        //enum z możliwymi rolami użytkowników
         public enum Role
         {
             Client,
@@ -15,6 +16,7 @@ namespace Pizzeria.users
         public string Password { get; set; }
         public Role UserRole { get; set; }
 
+        //konstruktor klasy User
         public User(string username, string password, Role role)
         {
             Username = username;
