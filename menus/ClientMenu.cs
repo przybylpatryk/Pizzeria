@@ -41,7 +41,7 @@ namespace Pizzeria.menus
                     client.GetOrderForC();
                     break;
                 case "3":
-                    client.GetOrderInfo();
+                    client.OrderPreview();
                     break;
                 case "4":
                     client.AddReview();

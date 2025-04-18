@@ -228,7 +228,7 @@ namespace Pizzeria.users
             this.clientMenu.Menu(this);
         }
 
-        public void GetOrderInfo()
+        public void OrderPreview()
         {
             Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
