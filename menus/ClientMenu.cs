@@ -7,9 +7,15 @@ namespace Pizzeria.menus
 {
     public class ClientMenu
     {
+        public delegate void EventHandler(Client client);
+        public event EventHandler OnCreatedOrder;
+
+
         //metoda wyświetlająca menu dla klienta
         public void Menu(Client client = null)
         {
+            OnCreatedOrder += OnCreatedOrderHandler;
+
             Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine("         Witamy w pizzerii!      ");
@@ -36,6 +42,7 @@ namespace Pizzeria.menus
             switch (choice)
             {
                 case "1":
+                    OnCreatedOrder?.Invoke(client);
                     client.CreateOrder();
                     break;
                 case "2":
@@ -59,13 +66,20 @@ namespace Pizzeria.menus
                 case "7":
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
-                    return;
+                    Environment.Exit(0);
                 default:
                     Console.WriteLine("Niepoprawny wybór, spróbuj ponownie.");
                     Thread.Sleep(1500);
                     Menu();
                     break;
             }
+        }
+
+        public static void OnCreatedOrderHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} złożył zamówienie!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
         }
     }
 }

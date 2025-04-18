@@ -53,7 +53,7 @@ namespace Pizzeria.menus
                 case "6":
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
-                    return;
+                    Environment.Exit(0);
                 default:
                     Console.WriteLine("Niepoprawny wybór, spróbuj ponownie.");
                     Thread.Sleep(1500);

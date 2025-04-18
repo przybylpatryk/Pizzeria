@@ -19,7 +19,7 @@ namespace Pizzeria.database
     public class Database
     {
         //dane do łączenia sie z bazą
-        private readonly string connectionString = "Server=localhost;Database=pizzeria;User=root;Password=student;";
+        private readonly string connectionString = "Server=localhost;Database=pizzeria;User=root;Password=;";
 
         public MySqlConnection Conn { get; set; }
 
