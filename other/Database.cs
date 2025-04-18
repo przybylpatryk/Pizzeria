@@ -219,5 +219,62 @@ namespace Pizzeria.database
             MySqlCommand result = new MySqlCommand(query, Conn);
             result.ExecuteNonQuery();
         }
+
+        public void GetOrderForC(Client client)
+        {
+            string query = $"SELECT * FROM zamowienia WHERE Nazwa_klienta = '{client.Username}';";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                Console.WriteLine($"ID: {row["ID"]}, Zamówienie: {row["Rodzaj_pizzy"]}, Klient: {row["Nazwa_klienta"]}, Data: {Convert.ToDateTime(row["Data_zamowienia"]).ToString("yyyy-MM-dd")}");
+            }
+            row.Close();
+        }
+
+        public void GetReviews()
+        {
+            string query = "SELECT * FROM opinie;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                Console.WriteLine($"ID: {row["ID"]}, Klient: {row["Nazwa_klienta"]}, Opinia: {row["opinia"]}");
+            }
+            row.Close();
+        }
+
+        public List<string> GetOrderIDForC(Client client)
+        {
+            List<string> orders = new List<string>();
+            string query = $"SELECT ID FROM zamowienia WHERE Nazwa_klienta = '{client.Username}' AND Zrobione = 1;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                orders.Add(row["ID"].ToString());
+            }
+            row.Close();
+            return orders;
+        }
+
+        public void GetOrderInfoForC(Client client)
+        {
+            string query = $"SELECT * FROM zamowienia WHERE Nazwa_klienta = '{client.Username}' AND Zrobione = 1;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            MySqlDataReader row = result.ExecuteReader();
+            while (row.Read())
+            {
+                Console.WriteLine($"ID: {row["ID"]}, Zamówienie: {row["Rodzaj_pizzy"]}, Klient: {row["Nazwa_klienta"]}, Data: {Convert.ToDateTime(row["Data_zamowienia"]).ToString("yyyy-MM-dd")}");
+            }
+            row.Close();
+        }
+
+        public void RecieveOrder(string ID, Client client)
+        {
+            string query = $"DELETE FROM zamowienia WHERE ID = '{ID}' AND Nazwa_klienta = '{client.Username}' AND Zrobione = 1;";
+            MySqlCommand result = new MySqlCommand(query, Conn);
+            result.ExecuteNonQuery();
+        }
     }
 }

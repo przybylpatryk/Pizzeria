@@ -156,5 +156,90 @@ namespace Pizzeria.users
             Thread.Sleep(1500);
             clientMenu.Menu(this);
         }
+
+        public void GetReviews()
+        {
+            Console.Clear();
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Recenzje!      ");
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine();
+            DB.GetReviews();
+            Console.WriteLine();
+            Console.WriteLine("Naciśnij dowolny klawisz aby wrócić do menu.");
+            Console.ReadKey();
+            clientMenu.Menu(this);
+        }
+
+        public void GetOrderForC()
+        {
+            Console.Clear();
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Zamówienia!      ");
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine();
+
+            List<string> orderID = DB.GetOrderIDForC(this);
+            if (orderID.Count == 0)
+            {
+                Console.WriteLine("Brak zamówień do przyjęcia!");
+                Thread.Sleep(1500);
+                this.clientMenu.Menu(this);
+                return;
+            }
+
+            DB.GetOrderForC(this);
+            Console.WriteLine();
+            Console.WriteLine("Podaj ID zamówienia, które chcesz przyjąć:");
+
+            string? orderW = Console.ReadLine();
+            while (true)
+            {
+                if (orderID.Contains(orderW))
+                {
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Niepoprawne ID zamówienia.");
+                    Thread.Sleep(1500);
+                    this.clientMenu.Menu(this);
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(orderW) && orderW.ToLower() == "esc")
+                {
+                    Console.WriteLine("Anulowano!");
+                    Thread.Sleep(1500);
+                    this.clientMenu.Menu(this);
+                    return;
+                }
+                else if (!string.IsNullOrEmpty(orderW))
+                {
+                    break;
+                }
+                Console.Write("Pusto!, spróbuj ponownie: ");
+                orderW = Console.ReadLine();
+            }
+            Console.WriteLine();
+            DB.RecieveOrder(orderW, this);
+            Console.WriteLine($"Zamówienie o ID {orderW} zostało przyjęte!");
+            Thread.Sleep(1500);
+            this.clientMenu.Menu(this);
+        }
+
+        public void GetOrderInfo()
+        {
+            Console.Clear();
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine("         Recenzje!      ");
+            Console.WriteLine("///////////////////////////////////////////");
+            Console.WriteLine();
+            DB.GetOrderInfoForC(this);
+            Console.WriteLine();
+            Console.WriteLine("Naciśnij dowolny klawisz aby wrócić do menu.");
+            Console.ReadKey();
+            clientMenu.Menu(this);
+        }
     }
 }

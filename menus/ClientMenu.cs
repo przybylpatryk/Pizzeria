@@ -38,10 +38,10 @@ namespace Pizzeria.menus
                     client.CreateOrder();
                     break;
                 case "2":
-                    client.GetOrder();
+                    client.GetOrderForC();
                     break;
                 case "3":
-                    client.GetOrders();
+                    client.GetOrderInfo();
                     break;
                 case "4":
                     client.AddReview();

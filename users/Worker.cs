@@ -55,7 +55,7 @@ namespace Pizzeria.users
             {
                 if (orderID.Contains(orderW))
                 {
-                    break;
+                    
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace Pizzeria.users
 
                 if (!string.IsNullOrEmpty(orderW) && orderW.ToLower() == "esc")
                 {
-                    Console.WriteLine("Anulowano dodawanie recenzji!");
+                    Console.WriteLine("Anulowano!");
                     Thread.Sleep(1500);
                     this.workerMenu.Menu(this);
                     return;
