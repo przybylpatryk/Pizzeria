@@ -251,7 +251,7 @@ namespace Pizzeria.users
         {
             Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
-            Console.WriteLine("         Recenzje!      ");
+            Console.WriteLine("         Zamówienia!      ");
             Console.WriteLine("///////////////////////////////////////////");
             Console.WriteLine();
             DB.GetOrderInfoForC(this);

@@ -100,7 +100,7 @@ namespace Pizzeria.users
                 Console.WriteLine("         Stwórz pizzę!      ");
                 Console.WriteLine("///////////////////////////////////////////");
                 Console.WriteLine();
-                Console.WriteLine("Napewno? (Y/N)");
+                Console.WriteLine("Na pewno? (Y/N)");
 
                 string? choice = Console.ReadLine().ToLower();
                 //sprawdza czy użytkownik podał poprawną wartość
@@ -145,7 +145,7 @@ namespace Pizzeria.users
                     }
                     Console.Write("\nPizza gotowa!");
                     DB.CompleteOrder(this);
-                    Console.WriteLine("Stworzono pizzę!");
+                    Console.WriteLine("\nStworzono pizzę!");
                     Thread.Sleep(1500);
                     workerMenu.Menu(this);
                 }
