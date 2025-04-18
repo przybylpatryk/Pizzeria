@@ -9,12 +9,24 @@ namespace Pizzeria.menus
     {
         public delegate void EventHandler(Client client);
         public event EventHandler OnCreatedOrder;
+        public event EventHandler OnGetOrderForC;
+        public event EventHandler OnOrderPreview;
+        public event EventHandler OnAddReview;
+        public event EventHandler OnGetReviews;
+        public event EventHandler OnLogOut;
 
 
         //metoda wyświetlająca menu dla klienta
         public void Menu(Client client = null)
         {
+            //subskrybuje zdarzenia
             OnCreatedOrder += OnCreatedOrderHandler;
+            OnGetOrderForC += OnGetOrderForCHandler;
+            OnOrderPreview += OnOrderPreviewHandler;
+            OnAddReview += OnAddReviewHandler;
+            OnGetReviews += OnGetReviewsHandler;
+            OnLogOut += OnLogOutHandler;
+
 
             Console.Clear();
             Console.WriteLine("///////////////////////////////////////////");
@@ -46,15 +58,19 @@ namespace Pizzeria.menus
                     client.CreateOrder();
                     break;
                 case "2":
+                    OnGetOrderForC?.Invoke(client);
                     client.GetOrderForC();
                     break;
                 case "3":
+                    OnOrderPreview?.Invoke(client);
                     client.OrderPreview();
                     break;
                 case "4":
+                    OnAddReview?.Invoke(client);
                     client.AddReview();
                     break;
                 case "5":
+                    OnGetReviews?.Invoke(client);
                     client.GetReviews();
                     break;
                 case "6":
@@ -67,6 +83,7 @@ namespace Pizzeria.menus
                     Console.WriteLine("Wychodzenie z programu...");
                     Thread.Sleep(1500);
                     Environment.Exit(0);
+                    break;
                 default:
                     Console.WriteLine("Niepoprawny wybór, spróbuj ponownie.");
                     Thread.Sleep(1500);
@@ -75,10 +92,45 @@ namespace Pizzeria.menus
             }
         }
 
+        //Obsluga zdarzeń
         public static void OnCreatedOrderHandler(Client client)
         {
             string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
             string logMessage = $"{DateTime.Now}: Klient {client.Username} złożył zamówienie!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+
+        public static void OnGetOrderForCHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} odebrał zamówienie!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+
+        public static void OnOrderPreviewHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} obejrzał zamówienie!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+
+        public static void OnAddReviewHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} dodał recenzję!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+
+        public static void OnGetReviewsHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} zobaczył recenzje!";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+        public static void OnLogOutHandler(Client client)
+        {
+            string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "logs.txt");
+            string logMessage = $"{DateTime.Now}: Klient {client.Username} wylogował się!";
             File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
         }
     }
